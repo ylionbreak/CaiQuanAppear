@@ -31,6 +31,7 @@ public class MainActivity extends ActionBarActivity {
 	Button connect;
 	TextView textView;
 	String result;
+	BluetoothManager bluetoothManager=new BluetoothManager();
 	//RelativeLayout layout = (RelativeLayout)findViewById(R.id.main_layout);
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +45,7 @@ public class MainActivity extends ActionBarActivity {
 			public void onClick(View v) {
 				BluetoothDevice device = bluetoothAdapter.getRemoteDevice("18:DC:56:D3:26:D1");
 				//BluetoothDevice device = bluetoothAdapter.getRemoteDevice("22:22:CC:06:08:C9");
-				connectDevice(device);
+				bluetoothManager.connectDevice(device);
 				connect.setVisibility(View.GONE);
 
 				if(transferSocket.isConnected()) {
@@ -68,31 +69,11 @@ public class MainActivity extends ActionBarActivity {
 
 	}
 
-	private void sendMessage(BluetoothSocket socket,String message){
-		OutputStream outputStream;
-		try {
-			outputStream = socket.getOutputStream();
-
-			byte[] bytes = (message+" ").getBytes();
-			bytes[bytes.length-1]=0;
-
-			outputStream.write(bytes);
-		}catch (IOException e){
-			e.printStackTrace();
-		}
-	}
-
-	void connectDevice(BluetoothDevice device){
-		try{
-			UUID uuid =UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
-			BluetoothSocket bluetoothSocket = device.createInsecureRfcommSocketToServiceRecord(uuid);
-			bluetoothSocket.connect();
-			transferSocket=bluetoothSocket;
-		}catch (IOException e){
-			e.printStackTrace();
-		}
-	}
-
+//
+//
+//
+//
+//
 	private void listenForMessages(BluetoothSocket socket,String _result){
 
 		int bufferSize =1024;
@@ -120,6 +101,9 @@ public class MainActivity extends ActionBarActivity {
 			e.printStackTrace();
 		}
 	}
+
+
+
 	private Handler handler =new Handler() {
 		@Override
 		public void handleMessage(Message msg) {
