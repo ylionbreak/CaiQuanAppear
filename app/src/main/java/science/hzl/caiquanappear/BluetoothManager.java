@@ -4,6 +4,7 @@ import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothServerSocket;
 import android.bluetooth.BluetoothSocket;
+import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 
@@ -19,14 +20,15 @@ public class BluetoothManager {
 	BluetoothSocket transferSocket;
 	Boolean listening=false;
 	String returnMessage="";
+	Handler handler;
 
-
-	void connectDevice(BluetoothDevice device){
+	void connectDevice(BluetoothDevice device,Handler _handler){
 		try{
 			UUID uuid =UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
 			BluetoothSocket bluetoothSocket = device.createInsecureRfcommSocketToServiceRecord(uuid);
 			bluetoothSocket.connect();
 			transferSocket=bluetoothSocket;
+			handler=_handler;
 			Log.e("x", String.valueOf(bluetoothSocket.isConnected()));
 		}catch (IOException e){
 			e.printStackTrace();
@@ -50,7 +52,6 @@ public class BluetoothManager {
 						BluetoothSocket serverSocket =btserver.accept();
 						//开始监听
 						transferSocket = serverSocket;
-
 						listenForMessages(serverSocket);
 					}catch (IOException e){
 						e.printStackTrace();
@@ -99,40 +100,19 @@ public class BluetoothManager {
 				}
 				listening=false;
 				returnMessage=result;
-			}
 
-		}catch (IOException e){
-			e.printStackTrace();
-		}
-	}
-
-	private void listenForMessages(BluetoothSocket socket,String _result){
-
-		int bufferSize =1024;
-		byte[] buffer = new byte[bufferSize];
-		try {
-			InputStream inputStream = socket.getInputStream();
-			int bytesRead = -1;
-
-			while (true){
-				bytesRead = inputStream.read(buffer);
-				if(bytesRead != -1){
-					String result = "";
-					while(bytesRead == bufferSize && buffer[bufferSize-1]!=0){
-						result = result + new String(buffer,0,bytesRead-1);
-						bytesRead = inputStream.read(buffer);
-					}
-				}
-
+				///改变界面
 				Message message = new Message();
 				message.what = 1;
-				handler.sendMessage(message);///////////////////////////
-
+				handler.sendMessage(message);
 			}
+
 		}catch (IOException e){
 			e.printStackTrace();
 		}
 	}
+
+
 
 	public BluetoothSocket getTransferSocket() {
 		return transferSocket;

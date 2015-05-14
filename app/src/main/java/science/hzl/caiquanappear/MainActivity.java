@@ -45,7 +45,7 @@ public class MainActivity extends ActionBarActivity {
 			public void onClick(View v) {
 				BluetoothDevice device = bluetoothAdapter.getRemoteDevice("18:DC:56:D3:26:D1");
 				//BluetoothDevice device = bluetoothAdapter.getRemoteDevice("22:22:CC:06:08:C9");
-				bluetoothManager.connectDevice(device);
+				bluetoothManager.connectDevice(device,handler);
 				connect.setVisibility(View.GONE);
 
 				if(transferSocket.isConnected()) {
