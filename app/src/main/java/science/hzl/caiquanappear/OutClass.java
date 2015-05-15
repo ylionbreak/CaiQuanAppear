@@ -8,4 +8,5 @@ public class OutClass {
 	static final int  JIANDAO = 2;
 	static final int  BU = 3;
 
+
 }
