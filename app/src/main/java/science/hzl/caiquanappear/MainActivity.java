@@ -160,13 +160,13 @@ public class MainActivity extends ActionBarActivity {
 					result = result + new String(buffer,0,bytesRead);
 				}
 				this.result=result;
-				if(Integer.parseInt(result)==1||Integer.parseInt(result)==2||Integer.parseInt(result)==3){
+			//	if(Integer.parseInt(result)==1||Integer.parseInt(result)==2||Integer.parseInt(result)==3){
 
 					Message message = new Message();
 					message.what = 1;
 					handler.sendMessage(message);
 
-				}
+			//	}
 
 			}
 		}catch (IOException e){
