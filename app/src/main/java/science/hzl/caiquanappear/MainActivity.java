@@ -29,10 +29,55 @@ import java.util.UUID;
 public class MainActivity extends ActionBarActivity {
 
 	BluetoothAdapter bluetoothAdapter=BluetoothAdapter.getDefaultAdapter();
-	BluetoothSocket transferSocket;
 	Button connect;
 	TextView textView;
 	String result;
+
+	private Handler handler =new Handler() {
+		@Override
+		public void handleMessage(Message msg) {
+			switch (msg.what) {
+				case 1:{
+					connect.setVisibility(View.VISIBLE);
+					connect.setText("");
+					Random random = new Random();
+					int a = random.nextInt()%3;
+
+//					ScaleAnimation scaleAnimation =new ScaleAnimation(0.3f,1,0.3f,1,Animation.RELATIVE_TO_SELF,0.5f,
+//							Animation.RELATIVE_TO_SELF,0.5f);
+//					scaleAnimation.setDuration(200);
+
+					if(a==0){
+//						connect.setBackgroundResource(R.drawable.shitou);
+//						connect.startAnimation(scaleAnimation);
+
+						gestureshitouImageView.setVisibility(View.VISIBLE);
+						ShitouAnimation.start();
+						//gestureshitouImageView.setVisibility(View.GONE);
+					}else if(a==1){
+//						connect.setBackgroundResource(R.drawable.jiandao);
+//						connect.startAnimation(scaleAnimation);
+
+						gesturejiandaoImageView.setVisibility(View.VISIBLE);
+						JiandaoAnimation.start();
+						//gesturejiandaoImageView.setVisibility(View.GONE);
+					}else if(a==2){
+//						connect.setBackgroundResource(R.drawable.bu);
+//						connect.startAnimation(scaleAnimation);
+
+						gesturebuImageView.setVisibility(View.VISIBLE);
+						BuAnimation.start();
+						//gesturebuImageView.setVisibility(View.GONE);
+					}
+
+				}
+				break;
+
+			}
+			super.handleMessage(msg);
+		}
+
+	};
 
 	ImageView gesturebuImageView;
 	ImageView gesturejiandaoImageView;
@@ -73,12 +118,12 @@ public class MainActivity extends ActionBarActivity {
 				bluetoothManager.connectDevice(device,handler);
 				connect.setVisibility(View.GONE);
 
-				if(transferSocket.isConnected()) {
+				if(bluetoothManager.transferSocket.isConnected()) {
 					Thread acceptTread = new Thread(new Runnable() {
 						@Override
 						public void run() {
 							try {
-								listenForMessages(transferSocket);
+								listenForMessages(bluetoothManager.transferSocket);
 							} catch (Exception e) {
 								e.printStackTrace();
 							}
@@ -131,51 +176,7 @@ public class MainActivity extends ActionBarActivity {
 
 
 
-	private Handler handler =new Handler() {
-		@Override
-		public void handleMessage(Message msg) {
-			switch (msg.what) {
-				case 1:{
-					connect.setVisibility(View.VISIBLE);
-					connect.setText("");
-					Random random = new Random();
-					int a = random.nextInt()%3;
 
-//					ScaleAnimation scaleAnimation =new ScaleAnimation(0.3f,1,0.3f,1,Animation.RELATIVE_TO_SELF,0.5f,
-//							Animation.RELATIVE_TO_SELF,0.5f);
-//					scaleAnimation.setDuration(200);
-
-					if(a==0){
-//						connect.setBackgroundResource(R.drawable.shitou);
-//						connect.startAnimation(scaleAnimation);
-
-						gestureshitouImageView.setVisibility(View.VISIBLE);
-						ShitouAnimation.start();
-						gestureshitouImageView.setVisibility(View.GONE);
-					}else if(a==1){
-//						connect.setBackgroundResource(R.drawable.jiandao);
-//						connect.startAnimation(scaleAnimation);
-
-						gesturejiandaoImageView.setVisibility(View.VISIBLE);
-						JiandaoAnimation.start();
-						gesturejiandaoImageView.setVisibility(View.GONE);
-					}else if(a==2){
-//						connect.setBackgroundResource(R.drawable.bu);
-//						connect.startAnimation(scaleAnimation);
-
-						gesturebuImageView.setVisibility(View.VISIBLE);
-						BuAnimation.start();
-						gesturebuImageView.setVisibility(View.GONE);
-					}
-
-				}
-					break;
-
-			}
-			super.handleMessage(msg);
-		}
-
-	};
 
 
 
