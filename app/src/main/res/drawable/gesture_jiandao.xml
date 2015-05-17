@@ -1,11 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <animation-list
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:oneshot="false"
+    android:oneshot="true"
     >
 
-    <item android:drawable="@drawable/a061" android:duration="150"></item>
-    <item android:drawable="@drawable/a062" android:duration="150"></item>
+    <item android:drawable="@drawable/a072" android:duration="80"></item>
+    <item android:drawable="@drawable/a073" android:duration="80"></item>
+    <item android:drawable="@drawable/a074" android:duration="80"></item>
+    <item android:drawable="@drawable/a075" android:duration="80"></item>
+    <item android:drawable="@drawable/a076" android:duration="80"></item>
+    <item android:drawable="@drawable/a077" android:duration="80"></item>
+    <item android:drawable="@drawable/a078" android:duration="80"></item>
+    <item android:drawable="@drawable/a079" android:duration="80"></item>
+    <item android:drawable="@drawable/a080" android:duration="80"></item>
+    <item android:drawable="@drawable/a081" android:duration="80"></item>
+    <item android:drawable="@drawable/a082" android:duration="80"></item>
+    <item android:drawable="@drawable/a083" android:duration="80"></item>
+    <item android:drawable="@drawable/a084" android:duration="80"></item>
+    <item android:drawable="@drawable/a085" android:duration="80"></item>
 
 
 </animation-list>

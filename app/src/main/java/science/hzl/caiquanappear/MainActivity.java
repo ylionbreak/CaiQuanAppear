@@ -38,10 +38,10 @@ public class MainActivity extends ActionBarActivity {
 		public void handleMessage(Message msg) {
 			switch (msg.what) {
 				case 1:{
-					connect.setVisibility(View.VISIBLE);
+					connect.setVisibility(View.GONE);
 					connect.setText("");
 					Random random = new Random();
-					int a = random.nextInt()%3;
+					int a = random.nextInt(3);
 
 //					ScaleAnimation scaleAnimation =new ScaleAnimation(0.3f,1,0.3f,1,Animation.RELATIVE_TO_SELF,0.5f,
 //							Animation.RELATIVE_TO_SELF,0.5f);
@@ -50,24 +50,27 @@ public class MainActivity extends ActionBarActivity {
 					if(a==0){
 //						connect.setBackgroundResource(R.drawable.shitou);
 //						connect.startAnimation(scaleAnimation);
-
+						gestureshitouImageView.setVisibility(View.GONE);
+						gesturejiandaoImageView.setVisibility(View.GONE);
+						gesturebuImageView.setVisibility(View.GONE);
 						gestureshitouImageView.setVisibility(View.VISIBLE);
 						ShitouAnimation.start();
-						//gestureshitouImageView.setVisibility(View.GONE);
 					}else if(a==1){
 //						connect.setBackgroundResource(R.drawable.jiandao);
 //						connect.startAnimation(scaleAnimation);
-
+						gestureshitouImageView.setVisibility(View.GONE);
+						gesturejiandaoImageView.setVisibility(View.GONE);
+						gesturebuImageView.setVisibility(View.GONE);
 						gesturejiandaoImageView.setVisibility(View.VISIBLE);
 						JiandaoAnimation.start();
-						//gesturejiandaoImageView.setVisibility(View.GONE);
 					}else if(a==2){
 //						connect.setBackgroundResource(R.drawable.bu);
 //						connect.startAnimation(scaleAnimation);
-
+						gestureshitouImageView.setVisibility(View.GONE);
+						gesturejiandaoImageView.setVisibility(View.GONE);
+						gesturebuImageView.setVisibility(View.GONE);
 						gesturebuImageView.setVisibility(View.VISIBLE);
 						BuAnimation.start();
-						//gesturebuImageView.setVisibility(View.GONE);
 					}
 
 				}
@@ -100,15 +103,12 @@ public class MainActivity extends ActionBarActivity {
 		gesturebuImageView.setVisibility(View.GONE);
 		BuAnimation = (AnimationDrawable)gesturebuImageView.getBackground();
 
+
 		gesturejiandaoImageView = (ImageView)findViewById(R.id.gesture_jiandao_animation);
-		gesturejiandaoImageView.setBackgroundResource(R.drawable.gesture_bu);
+		gesturejiandaoImageView.setBackgroundResource(R.drawable.gesture_jiandao);
 		gesturejiandaoImageView.setVisibility(View.GONE);
 		ShitouAnimation = (AnimationDrawable)gesturejiandaoImageView.getBackground();
 
-		gestureshitouImageView = (ImageView)findViewById(R.id.gesture_shitou_animation);
-		gestureshitouImageView.setBackgroundResource(R.drawable.gesture_bu);
-		gestureshitouImageView.setVisibility(View.GONE);
-		JiandaoAnimation = (AnimationDrawable)gestureshitouImageView.getBackground();
 
 		connect.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -118,7 +118,15 @@ public class MainActivity extends ActionBarActivity {
 				bluetoothManager.connectDevice(device,handler);
 				connect.setVisibility(View.GONE);
 
+				gestureshitouImageView = (ImageView)findViewById(R.id.gesture_shitou_animation);
+				gestureshitouImageView.setBackgroundResource(R.drawable.gesture_shitou);
+				gestureshitouImageView.setVisibility(View.GONE);
+				JiandaoAnimation = (AnimationDrawable)gestureshitouImageView.getBackground();
+
 				if(bluetoothManager.transferSocket.isConnected()) {
+
+
+
 					Thread acceptTread = new Thread(new Runnable() {
 						@Override
 						public void run() {

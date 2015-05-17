@@ -2,11 +2,23 @@
 
 <animation-list
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:oneshot="false"
+    android:oneshot="true"
     >
 
-    <item android:drawable="@drawable/a061" android:duration="150"></item>
-    <item android:drawable="@drawable/a062" android:duration="150"></item>
+    <item android:drawable="@drawable/a181" android:duration="80"></item>
+    <item android:drawable="@drawable/a182" android:duration="80"></item>
+    <item android:drawable="@drawable/a183" android:duration="80"></item>
+    <item android:drawable="@drawable/a184" android:duration="80"></item>
+    <item android:drawable="@drawable/a185" android:duration="80"></item>
+    <item android:drawable="@drawable/a186" android:duration="80"></item>
+    <item android:drawable="@drawable/a187" android:duration="80"></item>
+    <item android:drawable="@drawable/a188" android:duration="80"></item>
+    <item android:drawable="@drawable/a189" android:duration="80"></item>
+    <item android:drawable="@drawable/a190" android:duration="80"></item>
+    <item android:drawable="@drawable/a191" android:duration="80"></item>
+    <item android:drawable="@drawable/a192" android:duration="80"></item>
+    <item android:drawable="@drawable/a193" android:duration="80"></item>
+    <item android:drawable="@drawable/a194" android:duration="80"></item>
 
 
 </animation-list>
